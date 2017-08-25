@@ -1,0 +1,16 @@
+{
+  "name": "george",
+  "description": "george demonstration",
+  "main": "",
+  "authors": [
+    "George.Zheng <george.zheng007@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "dependencies": {
+    "angular": "1.4.2",
+    "bootstrap": "3.3.7",
+    "jquery": "^3.2.1",
+    "angular-resource": "1.4.2"
+  }
+}
