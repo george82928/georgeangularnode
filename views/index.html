@@ -2,163 +2,162 @@
 <html lang="en">
 
 <head>
-	<title>George Demonstration</title>
-	<link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.css" />
-	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-	<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
-	<script type="text/javascript" src="lib/angular/angular.js"></script>
-	<script type="text/javascript" src="lib/angular-resource/angular-resource.js"></script>
-	<script type="text/javascript" src="javascripts/angularapp.js"></script>
-	<script type="text/javascript" src="javascripts/service/payslip_service.js"></script>
-	<script type="text/javascript" src="javascripts/controller/payslip_controller.js"></script>
-	<style>
-		.item.ng-valid {
-			background-color: lightgreen;
-		}
+    <title>George Demonstration</title>
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+    <script type="text/javascript" src="lib/angular/angular.js"></script>
+    <script type="text/javascript" src="lib/angular-resource/angular-resource.js"></script>
+    <script type="text/javascript" src="javascripts/angularapp.js"></script>
+    <script type="text/javascript" src="javascripts/service/payslip_service.js"></script>
+    <script type="text/javascript" src="javascripts/controller/payslip_controller.js"></script>
+    <style>
+    .item.ng-valid {
+        background-color: lightgreen;
+    }
 
-		.item.ng-dirty.ng-invalid {
-			background-color: red;
-		}
-	</style>
+    .item.ng-dirty.ng-invalid {
+        background-color: red;
+    }
+    </style>
 </head>
 
 <body ng-app="myApp" class="ng-cloak">
-	<div class="generic-container" ng-controller="PaySlipController as ctrl">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<span class="lead">Please enter employee's detail:</span>
-			</div>
-			<div class="formcontainer">
-				<form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal" ng-model-options="{ allowInvalid: true}">
-					<input type="hidden" ng-model="ctrl.paySlip.id" />
-					<div class="row">
-						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable" for="firstName">First Name
-							</label>
-							<div class="col-md-7">
-								<input type="text" ng-model="ctrl.paySlip.firstName" name="firstName" id="firstName" class="item form-control input-sm" placeholder="Enter your First name" required ng-minlength="2" />
-								<div class="has-error" ng-show="myForm.$submitted || myForm.firstName.$touched">
-									<span ng-show="myForm.firstName.$error.required">This is a required field</span>
-									<span ng-show="myForm.firstName.$error.minlength">Minimum length required is 2</span>
-									<span ng-show="myForm.firstName.$invalid">This field is invalid </span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable" for="lastName">Last Name</label>
-							<div class="col-md-7">
-								<input type="text" ng-model="ctrl.paySlip.lastName" name="lastName" id="lastName" class="item form-control input-sm" placeholder="Enter your Last name" required ng-minlength="2" />
-								<div class="has-error" ng-show="myForm.$submitted || myForm.lastName.$touched">
-									<span ng-show="myForm.lastName.$error.required">This is a required field</span>
-									<span ng-show="myForm.lastName.$error.minlength">Minimum length required is 2</span>
-									<span ng-show="myForm.lastName.$invalid">This field is invalid </span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable" for="salary">Annual Salary
-							</label>
-							<div class="col-md-7">
-								<input type="number" ng-model="ctrl.paySlip.annualSalary" ng-pattern="/^[0-9]+$/" id="salary" name="salary" class="item form-control input-sm" placeholder="Enter your Annual Salary" required ng-min="100" />
-								<div class="has-error" ng-show="myForm.$submitted || myForm.salary.$touched">
-									<span ng-show="myForm.salary.$error.required">This is a required field</span>
-									<span ng-show="myForm.salary.$error.minlength">Minimum value is 100</span>
-									<span ng-show="myForm.salary.$invalid">This field is invalid, must be a positive integer</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable" for="rate">Super Rate (%)</label>
-							<div class="col-md-7">
-								<input type="number" ng-model="ctrl.paySlip.superRate" name="rate" id="rate" class="item form-control input-sm" placeholder="Enter your Super Rate" required ng-min="0" ng-max="50" ng-pattern="/^[0-9]+(\.[0-9]{0,2})?$/" step="0.01" />
-								<div class="has-error" ng-show="myForm.$submitted || myForm.rate.$touched">
-									<span ng-show="myForm.rate.$error.required">This is a required field</span>
-									<span ng-show="myForm.rate.$invalid">The value must be in 0 - 50 inclusive and you can just keep 2 digits after the decimal point</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable" for="paymentMonth">Payment Month
-							</label>
-							<div class="col-md-7">
-								<select class="form-control" name="paymentMonth" ng-model="ctrl.paySlip.paymentMonth" id="paymentMonth" required>
-									<option value="JANUARY">JANUARY</option>
-									<option value="FEBRUARY">FEBRUARY</option>
-									<option value="MARCH">MARCH</option>
-									<option value="APRIL">APRIL</option>
-									<option value="MAY">MAY</option>
-									<option value="JUNE">JUNE</option>
-									<option value="JULY">JULY</option>
-									<option value="AUGUST">AUGUST</option>
-									<option value="SEPTEMBER">SEPTEMBER</option>
-									<option value="OCTOBER">OCTOBER</option>
-									<option value="NOVEMBER">NOVEMBER</option>
-									<option value="DECEMBER">DECEMBER</option>
-								</select>
-								<div class="has-error" ng-show="myForm.$submitted || myForm.paymentMonth.$touched">
-									<span ng-show="myForm.paymentMonth.$error.required">This
+    <div class="generic-container" ng-controller="PaySlipController as ctrl">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="lead">Please enter employee's detail:</span>
+            </div>
+            <div class="formcontainer">
+                <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal" ng-model-options="{ allowInvalid: true}">
+                    <input type="hidden" ng-model="ctrl.paySlip.id" />
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="col-md-2 control-lable" for="firstName">First Name
+                            </label>
+                            <div class="col-md-7">
+                                <input type="text" ng-model="ctrl.paySlip.firstName" name="firstName" id="firstName" class="item form-control input-sm" placeholder="Enter your First name" required ng-minlength="2" />
+                                <div class="has-error" ng-show="myForm.$submitted || myForm.firstName.$touched">
+                                    <span ng-show="myForm.firstName.$error.required">This is a required field</span>
+                                    <span ng-show="myForm.firstName.$error.minlength">Minimum length required is 2</span>
+                                    <span ng-show="myForm.firstName.$invalid">This field is invalid </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="col-md-2 control-lable" for="lastName">Last Name</label>
+                            <div class="col-md-7">
+                                <input type="text" ng-model="ctrl.paySlip.lastName" name="lastName" id="lastName" class="item form-control input-sm" placeholder="Enter your Last name" required ng-minlength="2" />
+                                <div class="has-error" ng-show="myForm.$submitted || myForm.lastName.$touched">
+                                    <span ng-show="myForm.lastName.$error.required">This is a required field</span>
+                                    <span ng-show="myForm.lastName.$error.minlength">Minimum length required is 2</span>
+                                    <span ng-show="myForm.lastName.$invalid">This field is invalid </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="col-md-2 control-lable" for="salary">Annual Salary
+                            </label>
+                            <div class="col-md-7">
+                                <input type="number" ng-model="ctrl.paySlip.annualSalary" ng-pattern="/^[0-9]+$/" id="salary" name="salary" class="item form-control input-sm" placeholder="Enter your Annual Salary" required ng-min="100" />
+                                <div class="has-error" ng-show="myForm.$submitted || myForm.salary.$touched">
+                                    <span ng-show="myForm.salary.$error.required">This is a required field</span>
+                                    <span ng-show="myForm.salary.$error.minlength">Minimum value is 100</span>
+                                    <span ng-show="myForm.salary.$invalid">This field is invalid, must be a positive integer</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="col-md-2 control-lable" for="rate">Super Rate (%)</label>
+                            <div class="col-md-7">
+                                <input type="number" ng-model="ctrl.paySlip.superRate" name="rate" id="rate" class="item form-control input-sm" placeholder="Enter your Super Rate" required ng-min="0" ng-max="50" ng-pattern="/^[0-9]+(\.[0-9]{0,2})?$/" step="0.01" />
+                                <div class="has-error" ng-show="myForm.$submitted || myForm.rate.$touched">
+                                    <span ng-show="myForm.rate.$error.required">This is a required field</span>
+                                    <span ng-show="myForm.rate.$invalid">The value must be in 0 - 50 inclusive and you can just keep 2 digits after the decimal point</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="col-md-2 control-lable" for="paymentMonth">Payment Month
+                            </label>
+                            <div class="col-md-7">
+                                <select class="form-control" name="paymentMonth" ng-model="ctrl.paySlip.paymentMonth" id="paymentMonth" required>
+                                    <option value="JANUARY">JANUARY</option>
+                                    <option value="FEBRUARY">FEBRUARY</option>
+                                    <option value="MARCH">MARCH</option>
+                                    <option value="APRIL">APRIL</option>
+                                    <option value="MAY">MAY</option>
+                                    <option value="JUNE">JUNE</option>
+                                    <option value="JULY">JULY</option>
+                                    <option value="AUGUST">AUGUST</option>
+                                    <option value="SEPTEMBER">SEPTEMBER</option>
+                                    <option value="OCTOBER">OCTOBER</option>
+                                    <option value="NOVEMBER">NOVEMBER</option>
+                                    <option value="DECEMBER">DECEMBER</option>
+                                </select>
+                                <div class="has-error" ng-show="myForm.$submitted || myForm.paymentMonth.$touched">
+                                    <span ng-show="myForm.paymentMonth.$error.required">This
 										is a required field
 									</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="form-actions floatRight">
-							<input type="submit" value="Generate Payslip" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
-							<button type="reset" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset
-							</button>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-		<div class="panel panel-default">
-			<div class="row tablecontainer">
-				<h3 ng-show="ctrl.rowServerError">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-actions floatRight">
+                            <input type="submit" value="Generate Payslip" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
+                            <button type="reset" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-default payslipBackGround">
+            <div class="row payslipcontainer" ng-show="ctrl.rowServerError">
+                <h3>
 				<span ng-bind="ctrl.serverErrorMessage" class="label label-danger labelDisplay"></span>
 				</h3>
-			</div>
-			<!-- Default panel contents -->
-			<div class="panel-heading">
-				<span class="lead">Payslip Information</span>
-			</div>
-			<div class="tablecontainer table-responsive">
-				<table class="table table-hover table-bordered">
-					<thead>
-						<tr>
-							<th>Full Name</th>
-							<th>Pay Period</th>
-							<th>Gross Income</th>
-							<th>Income Tax</th>
-							<th>Net Income</th>
-							<th>Superannuation</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class="info">
-							<td><span ng-bind="ctrl.response.fullName" class="payslip"></span></td>
-							<td><span ng-bind="ctrl.response.payPeriod" class="payslip"></span></td>
-							<td><span ng-bind="ctrl.response.grossIncome" class="payslip"></span></td>
-							<td><span ng-bind="ctrl.response.tax" class="payslip"></span></td>
-							<td><span ng-bind="ctrl.response.netIncome" class="payslip"></span></td>
-							<td><span ng-bind="ctrl.response.superannuation" class="payslip"></span></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
-	<script type="text/javascript" src="lib/jquery/dist/jquery.js"></script>
-	<script type="text/javascript" src="lib/bootstrap/dist/js/bootstrap.js"></script>
+            </div>
+            <div class="tableContainer" ng-show="ctrl.tableShow">
+                <div class="panel-heading">
+                    <span class="lead">Payslip Information</span>
+                </div>
+                <table class="table table-hover table-bordered payslip table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Full Name</th>
+                            <th>Pay Period</th>
+                            <th>Gross Income</th>
+                            <th>Income Tax</th>
+                            <th>Net Income</th>
+                            <th>Superannuation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span ng-bind="ctrl.response.fullName"></span></td>
+                            <td><span ng-bind="ctrl.response.payPeriod"></span></td>
+                            <td><span ng-bind="ctrl.response.grossIncome"></span></td>
+                            <td><span ng-bind="ctrl.response.tax"></span></td>
+                            <td><span ng-bind="ctrl.response.netIncome"></span></td>
+                            <td><span ng-bind="ctrl.response.superannuation"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="lib/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="lib/bootstrap/dist/js/bootstrap.js"></script>
 </body>
 
 </html>

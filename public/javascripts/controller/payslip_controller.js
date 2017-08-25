@@ -11,12 +11,14 @@ App.controller('PaySlipController', ['$scope', 'PaySlip', function($scope, PaySl
     self.response = {};
     self.paySlipCopy = {};
     self.rowServerError = false;
+    self.tableShow = false;
     self.serverErrorMessage = null;
 
     self.createPaySlip = function() {
         self.paySlip.$save(function(responsePaySlip, headers) {
             self.response = responsePaySlip;
             self.rowServerError = false;
+            self.tableShow = true;
         }, function(error) {
             self.rowServerError = true;
             self.serverErrorMessage = error.data.error;
@@ -36,6 +38,7 @@ App.controller('PaySlipController', ['$scope', 'PaySlip', function($scope, PaySl
         self.response = {};
         self.paySlipCopy = {};
         self.rowServerError = false;
+        self.tableShow = false;
         self.serverErrorMessage = null;
     };
 }]);

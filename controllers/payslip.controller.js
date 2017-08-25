@@ -24,9 +24,7 @@ paySlipController.constructPaySlip = function(req, res) {
         paymentMonth: req.body.paymentMonth,
         superRate: req.body.superRate
     };
-
     var result = payService.buildPaySlip(serviceModel);
-
     res.status(200).json(result);
 };
 

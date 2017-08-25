@@ -23,19 +23,25 @@ body,
     padding: 20px;
 }
 
-.tablecontainer {
-    padding-left: 20px;
-    width: 80%;
+.payslipcontainer {
+    padding: 20px;
+}
+
+.payslipBackGround {
+    background-color: rgb(245, 245, 245);
+}
+
+.tableContainer {
+    width: 100%;
 }
 
 .labelDisplay {
     padding-left: 20px;
-    width: 80%;
     display: block;
 }
 
 .generic-container {
-    width: 80%;
+    width: 90%;
     margin-left: 20px;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -46,10 +52,6 @@ body,
     box-shadow: 0 0 30px black;
 }
 
-.custom-width {
-    width: 80px !important;
-}
-
 .payslip {
-    font-size: 20px !important;
+    font-size: 15px !important;
 }
