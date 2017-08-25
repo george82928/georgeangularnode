@@ -15,10 +15,6 @@ var users = require('./routes/users');
 
 var app = express();
 
-// view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
-
 app.use(favicon(__dirname + '/public/favicon.png'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -36,21 +32,14 @@ app.use(function(req, res, next) {
     next(err);
 });
 
-// error handlers
-
-// development error handler
-// will print stacktrace
-// if (app.get('env') === 'development') {
-// 	console.log('development mode');
-//     app.use(function(err, req, res, next) {
-//         res.status(err.status || 500).json({error: err.stack});
-//     });
-// }
-
-// production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-    res.status(err.status || 500).json({error: err.message});
+	if (err.status == 404) {
+		res.sendFile(path.join(__dirname, 'views', 'error.html'));
+	} else {
+		res.status(500).json({error: err.message});
+	}
+    
 });
 
 module.exports = app;
