@@ -33,6 +33,7 @@ Employee annual salary is 60,050, super rate is 9%, how much will this employee 
 ## Run the application ##
 1. Run command below:  
 	npm install  
+	bower install  
     npm start
 2. Open a web browser and access to   
     http://localhost:3000/
